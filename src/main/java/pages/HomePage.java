@@ -2,25 +2,30 @@ package pages;
 
 import org.openqa.selenium.By;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import utils.DriverFactory;
 
 public class HomePage {
 
-    AndroidDriver driver;
+    private final AndroidDriver driver;
+
+    private static final By NOTES_OPTION = AppiumBy.androidUIAutomator(
+            "new UiSelector().text(\"Notes\")"
+    );
+    private static final By CHECKLIST_OPTION = AppiumBy.androidUIAutomator(
+            "new UiSelector().text(\"Checklist\")"
+    );
 
     public HomePage() {
         this.driver = DriverFactory.getDriver();
     }
 
-    By notesOption = By.xpath("//*[@text='Notes']");
-    By checklistOption = By.xpath("//*[@text='Checklist']");
-
     public boolean isNotesVisible() {
-        return driver.findElement(notesOption).isDisplayed();
+        return driver.findElement(NOTES_OPTION).isDisplayed();
     }
 
     public boolean isChecklistVisible() {
-        return driver.findElement(checklistOption).isDisplayed();
+        return driver.findElement(CHECKLIST_OPTION).isDisplayed();
     }
 }
